@@ -43,10 +43,6 @@
             this.trackBarLightShaftWeight = new System.Windows.Forms.TrackBar();
             this.trackBarGearExposure = new System.Windows.Forms.TrackBar();
             this.label5 = new System.Windows.Forms.Label();
-            this.trackBarLuminanceThreshold = new System.Windows.Forms.TrackBar();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.trackBarLuminanceScaleFactor = new System.Windows.Forms.TrackBar();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -62,8 +58,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLightShaftDensity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLightShaftWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGearExposure)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarLuminanceThreshold)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarLuminanceScaleFactor)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLightMapOffsetY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLightMapOffsetX)).BeginInit();
@@ -225,46 +219,6 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Model Exposure";
             // 
-            // trackBarLuminanceThreshold
-            // 
-            this.trackBarLuminanceThreshold.AutoSize = false;
-            this.trackBarLuminanceThreshold.Location = new System.Drawing.Point(5, 460);
-            this.trackBarLuminanceThreshold.Maximum = 1000;
-            this.trackBarLuminanceThreshold.Name = "trackBarLuminanceThreshold";
-            this.trackBarLuminanceThreshold.Size = new System.Drawing.Size(104, 23);
-            this.trackBarLuminanceThreshold.TabIndex = 9;
-            this.trackBarLuminanceThreshold.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarLuminanceThreshold.Scroll += new System.EventHandler(this.trackBarLuminanceThreshold_Scroll);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(5, 444);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(106, 13);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "LuminanceThreshold";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(5, 483);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(116, 13);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "LuminanceScaleFactor";
-            // 
-            // trackBarLuminanceScaleFactor
-            // 
-            this.trackBarLuminanceScaleFactor.AutoSize = false;
-            this.trackBarLuminanceScaleFactor.Location = new System.Drawing.Point(5, 499);
-            this.trackBarLuminanceScaleFactor.Maximum = 5000;
-            this.trackBarLuminanceScaleFactor.Name = "trackBarLuminanceScaleFactor";
-            this.trackBarLuminanceScaleFactor.Size = new System.Drawing.Size(104, 23);
-            this.trackBarLuminanceScaleFactor.TabIndex = 9;
-            this.trackBarLuminanceScaleFactor.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarLuminanceScaleFactor.Scroll += new System.EventHandler(this.trackBarLuminanceScaleFactor_Scroll);
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label10);
@@ -350,14 +304,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(151, 524);
+            this.ClientSize = new System.Drawing.Size(151, 434);
             this.Controls.Add(this.trackBarFlareTexDivisor);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.trackBarLuminanceScaleFactor);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.trackBarLuminanceThreshold);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.trackBarGearExposure);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.trackBarLightShaftWeight);
@@ -383,8 +333,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLightShaftDensity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLightShaftWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGearExposure)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarLuminanceThreshold)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarLuminanceScaleFactor)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLightMapOffsetY)).EndInit();
@@ -410,10 +358,6 @@
         private System.Windows.Forms.TrackBar trackBarLightShaftWeight;
         private System.Windows.Forms.TrackBar trackBarGearExposure;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TrackBar trackBarLuminanceThreshold;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TrackBar trackBarLuminanceScaleFactor;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TrackBar trackBarLightMapOffsetY;
         private System.Windows.Forms.TrackBar trackBarLightMapOffsetX;

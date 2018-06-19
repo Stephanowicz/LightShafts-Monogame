@@ -345,6 +345,7 @@ namespace LightShafts
 //             _saveRTasPNG(_RenderTargetTemp, "blend.png");
 
             // create mipmap levels of the resulting target
+            //applying the 'linearFilter' effect 
             RenderTarget2D[] MipLevels =
                 _PostScreenFilters.CreateMipMapLevels(
                 _RenderTargetTemp);

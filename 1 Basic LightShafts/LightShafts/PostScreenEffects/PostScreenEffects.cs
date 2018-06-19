@@ -101,7 +101,6 @@ namespace PostscreenEffects
                 0,
                 ( int ) _Width, 
                 ( int ) _Height );
-            RenderTarget2D[ ] TempTargets = _CRT.GetTempLevels( );
             _Device.SetRenderTarget(  Destination );
             _SpriteBatch.Begin( );
             _SpriteBatch.Draw(

@@ -27,8 +27,6 @@ namespace LightShafts
             trackBarLightShaftDensity.Value = (int)(_game1.LightShaftDensity * 1000);
             trackBarLightShaftWeight.Value = (int)(_game1.LightShaftWeight * 1000);
             trackBarGearExposure.Value = (int)(_game1.ModelExposure * 1000);
-            trackBarLuminanceThreshold.Value = (int)(_game1.LuminanceThreshold * 1000);
-            trackBarLuminanceScaleFactor.Value = (int)(_game1.LuminanceScaleFactor * 1000);
             trackBarLightMapOffsetX.Value = (int)(_game1.LightMapOffset.X * 1000);
             trackBarLightMapOffsetY.Value = (int)(_game1.LightMapOffset.Y * 1000);
             trackBarFlareTexDivisor.Value = (int)(_game1.texFactor * 100);
@@ -66,18 +64,6 @@ namespace LightShafts
         private void trackBarGearExposure_Scroll(object sender, EventArgs e)
         {
             if (!init) _game1.ModelExposure = (float)trackBarGearExposure.Value / 1000f;
-
-        }
-
-        private void trackBarLuminanceThreshold_Scroll(object sender, EventArgs e)
-        {
-            if (!init) _game1.LuminanceThreshold = (float)trackBarLuminanceThreshold.Value / 1000f;
-
-        }
-
-        private void trackBarLuminanceScaleFactor_Scroll(object sender, EventArgs e)
-        {
-            if (!init) _game1.LuminanceScaleFactor = (float)trackBarLuminanceScaleFactor.Value / 1000f;
 
         }
 

@@ -11,8 +11,6 @@ namespace PostscreenEffects
     {
         private static int          MAX_DOWNSAMPLE = 6;
         private RenderTarget2D[ ]   _DownSampleTargets;
-        private RenderTarget2D[ ]   _UpSampleTargets;
-        private RenderTarget2D[ ]   _TempTargets;
         private GraphicsDevice      _Device;
         private int                 _Width;
         private int                 _Height;
@@ -34,8 +32,6 @@ namespace PostscreenEffects
             _Height = Height;
 
             _DownSampleTargets = new RenderTarget2D[ MAX_DOWNSAMPLE ];
-            _TempTargets = new RenderTarget2D[ MAX_DOWNSAMPLE ];
-            _UpSampleTargets = new RenderTarget2D[ MAX_DOWNSAMPLE ];
 
             PrepareMipMapLevels( );
         }
@@ -54,38 +50,8 @@ namespace PostscreenEffects
                     0, 
                     RenderTargetUsage.DiscardContents);
 
-                _TempTargets[ i ] = new RenderTarget2D(
-                    _Device,
-                    _Width / Factor,
-                    _Height / Factor,
-                    false,
-                    SurfaceFormat.HalfVector4, DepthFormat.Depth24,
-                    0,
-                    RenderTargetUsage.DiscardContents);
-
-                if ( i < MAX_DOWNSAMPLE - 1 )
-                {
-                    _UpSampleTargets[ i + 1 ] = new RenderTarget2D(
-                        _Device,
-                        _Width / Factor,
-                        _Height / Factor,
-                        false,
-                    SurfaceFormat.HalfVector4, DepthFormat.Depth24,
-                    0,
-                    RenderTargetUsage.DiscardContents);
-                } // if
-
                 Factor *= 2;
             } // for
-
-            _UpSampleTargets[ 0 ] = new RenderTarget2D(
-                _Device,
-                _Width,
-                _Height,
-                false,
-                SurfaceFormat.HalfVector4, DepthFormat.Depth24,
-                0,
-                RenderTargetUsage.DiscardContents);
         }
         // ---------------------------------------------------------
         public void GenerateMipMapLevels( )
@@ -128,20 +94,8 @@ namespace PostscreenEffects
 
             } // for 
             _Device.SetRenderTarget(null );
-            //PostScreenFilters._saveRTasPNG(_DownSampleTargets[5], "_DownSampleTargets5.png");
-            //PostScreenFilters._saveRTasPNG(_DownSampleTargets[4], "_DownSampleTargets4.png");
-            //PostScreenFilters._saveRTasPNG(_DownSampleTargets[3], "_DownSampleTargets3.png");
-            //PostScreenFilters._saveRTasPNG(_DownSampleTargets[2], "_DownSampleTargets2.png");
-            //PostScreenFilters._saveRTasPNG(_DownSampleTargets[1], "_DownSampleTargets1.png");
-            //PostScreenFilters._saveRTasPNG(_DownSampleTargets[0], "_DownSampleTargets0.png");
         }
 
-        // ---------------------------------------------------------
-        public RenderTarget2D GetUpsampleTarget( )
-        {
-            return _UpSampleTargets[ 0 ];
-            //return _RenderTarget;
-        }
         // ---------------------------------------------------------
         public RenderTarget2D RenderTarget { get; set; }
          // ---------------------------------------------------------
@@ -150,10 +104,5 @@ namespace PostscreenEffects
             return _DownSampleTargets;
         }
         // ---------------------------------------------------------
-        public RenderTarget2D[ ] GetTempLevels( )
-        {
-            return _TempTargets;
-        }
-        // ---------------------------------------------------------
-    }
+     }
 }

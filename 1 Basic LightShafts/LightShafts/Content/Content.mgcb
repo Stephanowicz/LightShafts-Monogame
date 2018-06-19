@@ -56,12 +56,6 @@
 /processorParam:TextureFormat=Color
 /build:Textures/flare.png
 
-#begin Effects/PostScreenEffects/AdditiveBlend.fx
-/importer:EffectImporter
-/processor:EffectProcessor
-/processorParam:DebugMode=Auto
-/build:Effects/PostScreenEffects/AdditiveBlend.fx
-
 #begin Effects/PostScreenEffects/LightShafts.fx
 /importer:EffectImporter
 /processor:EffectProcessor

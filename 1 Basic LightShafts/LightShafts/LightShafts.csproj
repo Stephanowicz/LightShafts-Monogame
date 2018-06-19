@@ -70,7 +70,6 @@
     <Content Include="Content\Effects\ModelMaterial.fx" />
     <Content Include="Content\Textures\flare.png" />
     <Content Include="Icon.ico" />
-    <Content Include="Content\Effects\PostScreenEffects\AdditiveBlend.fx" />
     <Content Include="Content\Effects\PostScreenEffects\LightShafts.fx" />
     <Content Include="Content\Effects\PostScreenEffects\LinearFilter.fx" />
   </ItemGroup>

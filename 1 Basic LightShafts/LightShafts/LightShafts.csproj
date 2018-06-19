@@ -50,11 +50,10 @@
       <DependentUpon>Controls.cs</DependentUpon>
     </Compile>
     <Compile Include="Game1.cs" />
-    <Compile Include="Particle.cs" />
+    <Compile Include="PostScreenEffects\ChainedRenderTarget.cs" />
+    <Compile Include="PostScreenEffects\PostScreenEffects.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Quad.cs" />
-    <Compile Include="SnowParticles.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -68,27 +67,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Effects\BlackShader.fx" />
-    <Content Include="Content\Effects\DiffuseColor.fx" />
     <Content Include="Content\Effects\ModelMaterial.fx" />
-    <Content Include="Content\Effects\ShadowMap.fx" />
-    <Content Include="Content\Effects\WorldCoordinates.fx" />
     <Content Include="Content\Textures\flare.png" />
-    <Content Include="Content\Textures\flare2.png" />
-    <Content Include="Content\Textures\SunBackground.dds" />
     <Content Include="Icon.ico" />
+    <Content Include="Content\Effects\PostScreenEffects\AdditiveBlend.fx" />
+    <Content Include="Content\Effects\PostScreenEffects\LightShafts.fx" />
+    <Content Include="Content\Effects\PostScreenEffects\LinearFilter.fx" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
-    <None Include="Content\Effects\LightSourceMask.fx" />
     <None Include="Content\Models\Cubical_Sphere.x" />
-    <None Include="Content\Models\star_sphere.x" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PostscreenEffects\PostscreenEffects.csproj">
-      <Project>{d3580336-6126-4905-821f-f168c4b456ca}</Project>
-      <Name>PostscreenEffects</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="stdole">

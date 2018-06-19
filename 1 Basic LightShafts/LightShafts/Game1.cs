@@ -38,9 +38,7 @@ namespace LightShafts
 
         private int _Width = 1024;
         private int _Height = 768;
-        private Effect _EffectWorld;
         private Effect _EffectBlack;
-        private Effect _EffectShadowMap;
         BasicEffect basicEffect;
 
         private Matrix _WorldView;
@@ -51,7 +49,6 @@ namespace LightShafts
         private RenderTarget2D _RenderTargetShaftsHalf;
         private RenderTarget2D _RenderTargetShaftsFull;
         private RenderTarget2D _RenderTargetFinal;
-        private RenderTarget2D _RenderTargetLuminance;
         private Texture2D _BackgroundTexture;
         Viewport viewport;
         private GraphicsDeviceManager graphics;
@@ -98,7 +95,7 @@ namespace LightShafts
                 TextureEnabled = true,
                 VertexColorEnabled = true,
             };
-            controls = new Controls(this);
+            controls = new Controls(this); 
             controls.Show();
         }
         // ---------------------------------------------------------
@@ -131,16 +128,8 @@ namespace LightShafts
                  false,
                  SurfaceFormat.HalfVector4, DepthFormat.Depth24);
 
-            // post-processing: only luminance values above certain
-            // threshold
-            _RenderTargetLuminance = new RenderTarget2D(
-                GraphicsDevice,
-                _Width,
-                _Height,
-                false,
-                SurfaceFormat.HalfVector4, DepthFormat.Depth24);
 
-            // temporal render target for additive blending
+            // temporal render target
             _RenderTargetTemp = new RenderTarget2D(
                 GraphicsDevice,
                 _Width,
@@ -216,12 +205,9 @@ namespace LightShafts
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             _ModelMaterial = Content.Load<Effect>("Effects\\ModelMaterial");
-            _EffectWorld = Content.Load<Effect>("Effects\\WorldCoordinates");
             _EffectBlack = Content.Load<Effect>("Effects\\BlackShader");
-            _EffectShadowMap = Content.Load<Effect>("Effects\\ShadowMap");
             _BackgroundTexture = Content.Load<Texture2D>("Textures\\flare");
             _model = Content.Load<Model>("Models\\Cubical_Sphere");
-            //_model = Content.Load<Model>("Models\\star_Sphere");
         }
         // ---------------------------------------------------------
         private void RenderScene(
@@ -310,7 +296,6 @@ namespace LightShafts
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here          
             int NumModels = 3;
             for( int i = 0; i < NumModels; ++i )
             {
@@ -387,23 +372,6 @@ namespace LightShafts
 
             // _saveRTasPNG(_RenderTargetShaftsFull, "RenderTargetShaftsFull.png");
 
-            ///////////////////////////////////////////////////////////
-            ////Doesn't work...maybe he forgot or whatever...////
-            // extract luminance values above threshold
-            //_PostScreenFilters.ExtractHighLuminance(
-            //    _RenderTargetShaftsFull,
-            //    _RenderTargetLuminance,
-            //    LuminanceThreshold,
-            //    LuminanceScaleFactor);
-
-            // create mipmap levels of extracted values and 
-            // additively blend them
-            //RenderTarget2D RT = _PostScreenFilters.AdditiveBlend(
-            //    _RenderTargetLuminance);
-
-            // _saveRTasPNG(RT, "AdditiveBlend.png");
-
-            //////////////////////////////////////////////////////
 
             // combine all the targets
             GraphicsDevice.SetRenderTarget( _RenderTargetFinal);
@@ -413,7 +381,6 @@ namespace LightShafts
                 BlendState.Additive);
             spriteBatch.Draw(_RenderTargetShaftsFull, Vector2.Zero, Color.White);
             spriteBatch.Draw(_RenderTargetColor, Vector2.Zero, Color.White);
-////            spriteBatch.Draw(RT, Vector2.Zero, Color.White);
             spriteBatch.End();
             GraphicsDevice.SetRenderTarget(null);
 

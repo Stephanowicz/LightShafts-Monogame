@@ -44,8 +44,9 @@ namespace LightShafts
         private Matrix _WorldView;
         private Matrix _WorldProjection;
         private RenderTarget2D _RenderTargetColor;
-        private RenderTarget2D _RenderTargetTemp;
+        private RenderTarget2D _RenderTargetMaskedBackground;
         private RenderTarget2D _RenderTargetMask;
+        private RenderTarget2D _RenderTargetLinearFilter;
         private RenderTarget2D _RenderTargetShaftsHalf;
         private RenderTarget2D _RenderTargetShaftsFull;
         private RenderTarget2D _RenderTargetFinal;
@@ -128,15 +129,6 @@ namespace LightShafts
                  false,
                  SurfaceFormat.HalfVector4, DepthFormat.Depth24);
 
-
-            // temporal render target
-            _RenderTargetTemp = new RenderTarget2D(
-                GraphicsDevice,
-                _Width,
-                _Height,
-                false,
-                SurfaceFormat.HalfVector4, DepthFormat.Depth24);
-
             // the models drawn black
             _RenderTargetMask = new RenderTarget2D(
                 GraphicsDevice,
@@ -145,16 +137,31 @@ namespace LightShafts
                 false,
                 SurfaceFormat.HalfVector4, DepthFormat.Depth24);
 
-            // post-processing: the screen in half resolution
+            // the masked background texture (the flare texture)  
+            _RenderTargetMaskedBackground = new RenderTarget2D(
+                GraphicsDevice,
+                _Width,
+                _Height,
+                false,
+                SurfaceFormat.HalfVector4, DepthFormat.Depth24);
+
+            // post-processing: apply "linear filter" in half resolution
+            _RenderTargetLinearFilter = new RenderTarget2D(
+                GraphicsDevice,
+                _Width,
+                _Height,
+                false,
+                SurfaceFormat.HalfVector4, DepthFormat.Depth24);
+				
+            // post-processing: generate LightShafts in half resolution
             _RenderTargetShaftsHalf = new RenderTarget2D(
                 GraphicsDevice,
                 _Width / 2,
                 _Height / 2,
                 false,
                 SurfaceFormat.HalfVector4, DepthFormat.Depth24);
-
-            // post-processing: the screen scaled to full 
-            // resolution
+				
+            // post-processing: the screen scaled to full resolution
             _RenderTargetShaftsFull = new RenderTarget2D(
                 GraphicsDevice,
                 _Width,
@@ -296,6 +303,7 @@ namespace LightShafts
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            //animate the models
             int NumModels = 3;
             for( int i = 0; i < NumModels; ++i )
             {
@@ -310,6 +318,7 @@ namespace LightShafts
                 }
             }
 
+            //basic effect for the background texture (the flare texture)
             viewport = GraphicsDevice.Viewport;
             basicEffect.Projection = Matrix.CreateTranslation(-0.5f, -0.5f, 0) *
                           Matrix.CreateOrthographicOffCenter(0, viewport.Width, viewport.Height, 0, 0, 1);
@@ -318,7 +327,7 @@ namespace LightShafts
         }
         protected override void Draw(GameTime gameTime)
         {
-            // render the scene in black
+            //  render the scene in black
             RenderScene(
                 _RenderTargetMask,
                 _EffectBlack,
@@ -334,29 +343,43 @@ namespace LightShafts
            // _saveRTasPNG(_RenderTargetColor, "RenderTargetColor.png");
 
             // additively render the mask over the background
-            GraphicsDevice.SetRenderTarget(_RenderTargetTemp);
+            GraphicsDevice.SetRenderTarget(_RenderTargetMaskedBackground);
             GraphicsDevice.Clear(Color.Black);
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, null, null, null, basicEffect, Matrix.CreateScale(1f/ (float)texFactor));
-            spriteBatch.Draw(_BackgroundTexture, new Rectangle((int)((2*LightMapPosition.X + LightMapOffset.X) * GraphicsDevice.Viewport.Width - _BackgroundTexture.Width / texFactor / 2), (int)((2*LightMapPosition.Y + LightMapOffset.Y) * GraphicsDevice.Viewport.Height - _BackgroundTexture.Height / texFactor / 2), (int)(_BackgroundTexture.Width/ texFactor),(int)( _BackgroundTexture.Height/ texFactor)), Color.White);
-            spriteBatch.Draw(_RenderTargetMask, Vector2.Zero, Color.Black);
+            spriteBatch.Begin(
+                SpriteSortMode.Immediate, 
+                BlendState.AlphaBlend, 
+                null, 
+                null, 
+                null, 
+                basicEffect, 
+                Matrix.CreateScale(1f/ (float)texFactor));
+            spriteBatch.Draw(
+                _BackgroundTexture, 
+                new Rectangle(
+                    (int)((2*LightMapPosition.X + LightMapOffset.X) * GraphicsDevice.Viewport.Width - _BackgroundTexture.Width / texFactor / 2), 
+                    (int)((2*LightMapPosition.Y + LightMapOffset.Y) * GraphicsDevice.Viewport.Height - _BackgroundTexture.Height / texFactor / 2), 
+                    (int)(_BackgroundTexture.Width/ texFactor),
+                    (int)( _BackgroundTexture.Height/ texFactor)), 
+                Color.White);
+            spriteBatch.Draw(
+                _RenderTargetMask, 
+                Vector2.Zero, 
+                Color.Black);
             spriteBatch.End();
             GraphicsDevice.SetRenderTarget(null);
 
-//             _saveRTasPNG(_RenderTargetTemp, "blend.png");
+            //_saveRTasPNG(_RenderTargetMaskedBackground, "MaskedBackground.png");
 
-            // create mipmap levels of the resulting target
-            //applying the 'linearFilter' effect 
-            RenderTarget2D[] MipLevels =
-                _PostScreenFilters.CreateMipMapLevels(
-                _RenderTargetTemp);
+            // applying the 'linearFilter' effect to the masked background
+            // on half of the resolution
+            _PostScreenFilters.linearFilter(
+                _RenderTargetMaskedBackground,
+                _RenderTargetLinearFilter);
 
-            //for (int i = 0; i < MipLevels.Length; ++i)
-            //_saveRTasPNG(MipLevels[ i ], "mipLevel_" + i + ".png");
-            //_saveRTasPNG(MipLevels[0], "mipLevel_0.png");
-
-            // perform the light shafts on half of the resolution
+            // perform the light shafts on the masked background
+            // on half of the resolution
             _PostScreenFilters.LightShafts(
-                MipLevels[0],
+                _RenderTargetLinearFilter,
                 _RenderTargetShaftsHalf,
                 LightMapPosition,
                 LightShaftDensity,
@@ -380,8 +403,14 @@ namespace LightShafts
             spriteBatch.Begin(
                 SpriteSortMode.Immediate,
                 BlendState.Additive);
-            spriteBatch.Draw(_RenderTargetShaftsFull, Vector2.Zero, Color.White);
-            spriteBatch.Draw(_RenderTargetColor, Vector2.Zero, Color.White);
+            spriteBatch.Draw(
+                _RenderTargetShaftsFull,
+                Vector2.Zero, 
+                Color.White);
+            spriteBatch.Draw(
+                _RenderTargetColor, 
+                Vector2.Zero, 
+                Color.White);
             spriteBatch.End();
             GraphicsDevice.SetRenderTarget(null);
 

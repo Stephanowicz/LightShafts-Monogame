@@ -50,8 +50,7 @@
       <DependentUpon>Controls.cs</DependentUpon>
     </Compile>
     <Compile Include="Game1.cs" />
-    <Compile Include="PostScreenEffects\ChainedRenderTarget.cs" />
-    <Compile Include="PostScreenEffects\PostScreenEffects.cs" />
+    <Compile Include="PostScreenEffects.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

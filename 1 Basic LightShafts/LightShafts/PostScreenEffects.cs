@@ -10,46 +10,53 @@ namespace PostscreenEffects
 {
     public class PostScreenFilters
     {
-        private Effect              _LinearFilterEffect;        
-        private Effect              _LightShafts;
-        private int                 _Width;
-        private int                 _Height;
-        private GraphicsDevice      _Device;
-        private ChainedRenderTarget _CRT;
-        private SpriteBatch         _SpriteBatch;
+        private Effect _LinearFilterEffect;
+        private Effect _LightShafts;
+        private int _Width;
+        private int _Height;
+        private GraphicsDevice _Device;
+        private SpriteBatch _SpriteBatch;
 
         // ---------------------------------------------------------
         public PostScreenFilters(
             int Width,
             int Height,
             GraphicsDevice Device,
-            ContentManager Content )
+            ContentManager Content)
         {
             _Device = Device;
-            _SpriteBatch = new SpriteBatch( _Device );
+            _SpriteBatch = new SpriteBatch(_Device);
             _Width = Width;
             _Height = Height;
-            _LinearFilterEffect = Content.Load<Effect>("Effects\\PostScreenEffects\\LinearFilter");            
+            _LinearFilterEffect = Content.Load<Effect>("Effects\\PostScreenEffects\\LinearFilter");
             _LightShafts = Content.Load<Effect>("Effects\\PostScreenEffects\\LightShafts");
-
-            _CRT = new ChainedRenderTarget(
-                new SpriteBatch( _Device ),
-                _LinearFilterEffect,
-                _Device,
-                Width,
-                Height );
         }
         // ---------------------------------------------------------
-        public RenderTarget2D[ ] CreateMipMapLevels( 
-            RenderTarget2D Source )
+        public void linearFilter(
+            RenderTarget2D rtSource,
+            RenderTarget2D rtDestination)
         {
-            _CRT.RenderTarget = Source;
-            _CRT.GenerateMipMapLevels( );
-            return _CRT.GetMipLevels( );
+            Vector2 TextureSize = new Vector2(_Width/2, _Height/2);
+            Rectangle Rect = new Rectangle(
+                0,
+                0,
+                (int)_Width/2,
+                (int)_Height/2);
+
+            Effect effect = _LinearFilterEffect;
+            _Device.SetRenderTarget(rtDestination);
+            _Device.Clear(Color.Black);
+            effect.CurrentTechnique = effect.Techniques[0];
+            effect.Parameters["gTextureSize"].SetValue(TextureSize);
+            _SpriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
+
+            effect.CurrentTechnique.Passes[0].Apply();
+            _SpriteBatch.Draw(rtSource, Rect, Color.White);
+            _SpriteBatch.End();
+            _Device.SetRenderTarget(null);
         }
         // ---------------------------------------------------------
-
-        public void LightShafts( 
+        public void LightShafts(  
             RenderTarget2D RenderTargetMask,
             RenderTarget2D Destination,
             Vector2 LightPos,            

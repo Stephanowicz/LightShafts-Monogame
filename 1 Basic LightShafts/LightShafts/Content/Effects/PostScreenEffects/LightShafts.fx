@@ -21,19 +21,30 @@ float		gExposure;
 float4 PixelShaderFunction(PS_IN input) : SV_TARGET0
 {
     float2 TexCoord = input.texCoord;
+	// Calculate vector from pixel to light source in screen space.
     float2 DeltaTexCoord = (TexCoord.xy - gScreenLightPos.xy);
     float Len = length(DeltaTexCoord);
+	// Divide by number of samples and scale by control factor.
     DeltaTexCoord *= 1.0 / NUM_SAMPLES * gDensity;
-    float4 Color = tex2D(TextureSampler, TexCoord);
+	// Store initial sample.
+	float4 Color = tex2D(TextureSampler, TexCoord);
+	// Set up illumination decay factor.
     float IlluminationDecay = 1.0;
+	// Evaluate summation from Equation 3 ( see https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch13.html) NUM_SAMPLES iterations.
     for (int i = 0; i < NUM_SAMPLES; ++i)
     {
-        TexCoord -= DeltaTexCoord;
+		// Step sample location along ray.
+		TexCoord -= DeltaTexCoord;
+		// Retrieve sample at new location.
         float4 Sample = tex2D(TextureSampler, TexCoord);
+		// Apply sample attenuation scale/decay factors.
         Sample *= IlluminationDecay * gWeight;
-        Color += Sample;
-        IlluminationDecay *= gDecay;
+		// Accumulate combined color.
+		Color += Sample;
+		// Update exponential decay factor.
+		IlluminationDecay *= gDecay;
     }
+	// Output final color with a further scale control factor.
     return float4(Color.xyz * gExposure, 1.0);
 }
 // ---------------------------------------------------------

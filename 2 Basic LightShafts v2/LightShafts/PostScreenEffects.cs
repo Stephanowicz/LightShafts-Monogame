@@ -65,7 +65,8 @@ namespace PostscreenEffects
             float Density,
             float Decay,
             float Weight,
-            float Exposure)
+            float Exposure,
+            int numSamples)
         {
             _Device.SetRenderTarget( Destination );
             _Device.Clear( ClearOptions.Target, Vector4.Zero, 1, 0 );
@@ -77,6 +78,7 @@ namespace PostscreenEffects
             effect.Parameters["gDecay"].SetValue(Decay);
             effect.Parameters["gWeight"].SetValue(Weight);
             effect.Parameters["gExposure"].SetValue(Exposure);
+            effect.Parameters["NUM_SAMPLES"].SetValue(numSamples);
 
             foreach ( EffectPass pass in effect.CurrentTechnique.Passes )
             {

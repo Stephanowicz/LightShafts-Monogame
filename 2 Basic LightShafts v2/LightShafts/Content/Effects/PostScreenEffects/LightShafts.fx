@@ -1,4 +1,4 @@
-#define NUM_SAMPLES 100
+//#define NUM_SAMPLES 100
 
 struct PS_IN
 {
@@ -15,7 +15,7 @@ float		gDensity;
 float		gDecay;
 float		gWeight;
 float		gExposure;
-
+int         NUM_SAMPLES = 100;
 // ---------------------------------------------------------
 float4 PixelShaderFunction(PS_IN input) : SV_TARGET0
 {
@@ -31,7 +31,7 @@ float4 PixelShaderFunction(PS_IN input) : SV_TARGET0
     float IlluminationDecay = 1.0;
     float3 Sample;
 	// Evaluate summation from Equation 3 ( see https://developer.nvidia.com/gpugems/GPUGems3/gpugems3_ch13.html) NUM_SAMPLES iterations.
-    [unroll]
+    [unroll (400)]
     for (int i = 0; i < NUM_SAMPLES; ++i)
     {
 		// Step sample location along ray.
@@ -53,6 +53,6 @@ technique Technique1
 {
     pass Pass1
     {
-        PixelShader = compile ps_4_0_level_9_3 PixelShaderFunction();
+        PixelShader = compile ps_5_0 PixelShaderFunction();
     }
 }

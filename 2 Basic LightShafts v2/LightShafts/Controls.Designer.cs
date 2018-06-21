@@ -55,6 +55,9 @@
             this.trackBarTexSampleSize = new System.Windows.Forms.TrackBar();
             this.label6 = new System.Windows.Forms.Label();
             this.lblTexSampleSize = new System.Windows.Forms.Label();
+            this.lblNumSamples = new System.Windows.Forms.Label();
+            this.trackBarNumSamples = new System.Windows.Forms.TrackBar();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLightPosX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarLightPosY)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -68,6 +71,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFlareTexDivisor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGearExposure)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTexSampleSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarNumSamples)).BeginInit();
             this.SuspendLayout();
             // 
             // trackBarLightPosX
@@ -128,7 +132,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 257);
+            this.label1.Location = new System.Drawing.Point(8, 302);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 13);
             this.label1.TabIndex = 2;
@@ -137,7 +141,7 @@
             // trackBarLightShaftExposure
             // 
             this.trackBarLightShaftExposure.AutoSize = false;
-            this.trackBarLightShaftExposure.Location = new System.Drawing.Point(8, 273);
+            this.trackBarLightShaftExposure.Location = new System.Drawing.Point(8, 318);
             this.trackBarLightShaftExposure.Maximum = 1500;
             this.trackBarLightShaftExposure.Name = "trackBarLightShaftExposure";
             this.trackBarLightShaftExposure.Size = new System.Drawing.Size(116, 23);
@@ -148,7 +152,7 @@
             // trackBarLightShaftDecay
             // 
             this.trackBarLightShaftDecay.AutoSize = false;
-            this.trackBarLightShaftDecay.Location = new System.Drawing.Point(8, 313);
+            this.trackBarLightShaftDecay.Location = new System.Drawing.Point(8, 358);
             this.trackBarLightShaftDecay.Maximum = 1100;
             this.trackBarLightShaftDecay.Name = "trackBarLightShaftDecay";
             this.trackBarLightShaftDecay.Size = new System.Drawing.Size(116, 23);
@@ -159,7 +163,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 297);
+            this.label2.Location = new System.Drawing.Point(8, 342);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 13);
             this.label2.TabIndex = 4;
@@ -168,7 +172,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 336);
+            this.label3.Location = new System.Drawing.Point(8, 381);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(93, 13);
             this.label3.TabIndex = 4;
@@ -177,7 +181,7 @@
             // trackBarLightShaftDensity
             // 
             this.trackBarLightShaftDensity.AutoSize = false;
-            this.trackBarLightShaftDensity.Location = new System.Drawing.Point(8, 352);
+            this.trackBarLightShaftDensity.Location = new System.Drawing.Point(8, 397);
             this.trackBarLightShaftDensity.Maximum = 2000;
             this.trackBarLightShaftDensity.Name = "trackBarLightShaftDensity";
             this.trackBarLightShaftDensity.Size = new System.Drawing.Size(116, 23);
@@ -188,7 +192,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 376);
+            this.label4.Location = new System.Drawing.Point(8, 421);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 13);
             this.label4.TabIndex = 4;
@@ -197,7 +201,7 @@
             // trackBarLightShaftWeight
             // 
             this.trackBarLightShaftWeight.AutoSize = false;
-            this.trackBarLightShaftWeight.Location = new System.Drawing.Point(8, 392);
+            this.trackBarLightShaftWeight.Location = new System.Drawing.Point(8, 437);
             this.trackBarLightShaftWeight.Maximum = 1500;
             this.trackBarLightShaftWeight.Name = "trackBarLightShaftWeight";
             this.trackBarLightShaftWeight.Size = new System.Drawing.Size(116, 23);
@@ -288,7 +292,7 @@
             // 
             // btnToggleFullscreen
             // 
-            this.btnToggleFullscreen.Location = new System.Drawing.Point(11, 487);
+            this.btnToggleFullscreen.Location = new System.Drawing.Point(11, 532);
             this.btnToggleFullscreen.Name = "btnToggleFullscreen";
             this.btnToggleFullscreen.Size = new System.Drawing.Size(128, 31);
             this.btnToggleFullscreen.TabIndex = 14;
@@ -298,7 +302,7 @@
             // 
             // btnDesktopBackground
             // 
-            this.btnDesktopBackground.Location = new System.Drawing.Point(11, 524);
+            this.btnDesktopBackground.Location = new System.Drawing.Point(11, 569);
             this.btnDesktopBackground.Name = "btnDesktopBackground";
             this.btnDesktopBackground.Size = new System.Drawing.Size(128, 31);
             this.btnDesktopBackground.TabIndex = 15;
@@ -309,7 +313,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 430);
+            this.label5.Location = new System.Drawing.Point(8, 475);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(83, 13);
             this.label5.TabIndex = 6;
@@ -318,7 +322,7 @@
             // trackBarGearExposure
             // 
             this.trackBarGearExposure.AutoSize = false;
-            this.trackBarGearExposure.Location = new System.Drawing.Point(8, 446);
+            this.trackBarGearExposure.Location = new System.Drawing.Point(8, 491);
             this.trackBarGearExposure.Maximum = 1000;
             this.trackBarGearExposure.Name = "trackBarGearExposure";
             this.trackBarGearExposure.Size = new System.Drawing.Size(116, 23);
@@ -359,11 +363,46 @@
             this.lblTexSampleSize.TabIndex = 18;
             this.lblTexSampleSize.Text = "1/2";
             // 
+            // lblNumSamples
+            // 
+            this.lblNumSamples.AutoSize = true;
+            this.lblNumSamples.Location = new System.Drawing.Point(119, 267);
+            this.lblNumSamples.Name = "lblNumSamples";
+            this.lblNumSamples.Size = new System.Drawing.Size(25, 13);
+            this.lblNumSamples.TabIndex = 21;
+            this.lblNumSamples.Text = "100";
+            // 
+            // trackBarNumSamples
+            // 
+            this.trackBarNumSamples.AutoSize = false;
+            this.trackBarNumSamples.LargeChange = 1;
+            this.trackBarNumSamples.Location = new System.Drawing.Point(8, 265);
+            this.trackBarNumSamples.Maximum = 400;
+            this.trackBarNumSamples.Minimum = 64;
+            this.trackBarNumSamples.Name = "trackBarNumSamples";
+            this.trackBarNumSamples.Size = new System.Drawing.Size(116, 23);
+            this.trackBarNumSamples.TabIndex = 20;
+            this.trackBarNumSamples.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBarNumSamples.Value = 100;
+            this.trackBarNumSamples.Scroll += new System.EventHandler(this.trackBarNumSamples_Scroll);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(5, 249);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(97, 13);
+            this.label13.TabIndex = 19;
+            this.label13.Text = "Number of samples";
+            // 
             // Controls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(151, 567);
+            this.ClientSize = new System.Drawing.Size(151, 612);
+            this.Controls.Add(this.lblNumSamples);
+            this.Controls.Add(this.trackBarNumSamples);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.lblTexSampleSize);
             this.Controls.Add(this.trackBarTexSampleSize);
             this.Controls.Add(this.label6);
@@ -403,6 +442,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarFlareTexDivisor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGearExposure)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarTexSampleSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarNumSamples)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -437,5 +477,8 @@
         private System.Windows.Forms.TrackBar trackBarTexSampleSize;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblTexSampleSize;
+        private System.Windows.Forms.Label lblNumSamples;
+        private System.Windows.Forms.TrackBar trackBarNumSamples;
+        private System.Windows.Forms.Label label13;
     }
 }

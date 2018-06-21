@@ -27,6 +27,7 @@ namespace LightShafts
         public Vector2 LightMapOffset { get; set; } = new Vector2(0f, 0f);
         public float texFactor { get; set; } = 1.49f;
         public int texSampleSize { get; set; } = 2;
+        public int numSamples { get; set; } = 100;
         public float LightShaftExposure { get; set; } = 0.351f;
         public float LightShaftDecay { get; set; } = 0.986f;
         public float LightShaftDensity { get; set; } = 1.056f;
@@ -540,7 +541,8 @@ namespace LightShafts
                 LightShaftDensity,
                 LightShaftDecay,
                 LightShaftWeight,
-                LightShaftExposure);
+                LightShaftExposure,
+                numSamples);
 
             // _saveRTasPNG(_RenderTargetShaftsSample, "RenderTargetShaftsSample.png");
 

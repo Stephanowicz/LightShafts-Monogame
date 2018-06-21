@@ -32,6 +32,8 @@ namespace LightShafts
             trackBarFlareTexDivisor.Value = (int)(_game1.texFactor * 100);
             trackBarTexSampleSize.Value = _game1.texSampleSize;
             lblTexSampleSize.Text = "1/" + trackBarTexSampleSize.Value.ToString();
+            trackBarNumSamples.Value = _game1.numSamples;
+            lblNumSamples.Text = trackBarNumSamples.Value.ToString();
             init = false;
         }
 
@@ -98,6 +100,15 @@ namespace LightShafts
                 _game1.texSampleSize = trackBarTexSampleSize.Value;
                 lblTexSampleSize.Text = "1/" + trackBarTexSampleSize.Value.ToString();
                 _game1._reSetRT();
+            }
+        }
+
+        private void trackBarNumSamples_Scroll(object sender, EventArgs e)
+        {
+            if (!init)
+            {
+                _game1.numSamples = trackBarNumSamples.Value;
+                lblNumSamples.Text = trackBarNumSamples.Value.ToString();
             }
         }
     }

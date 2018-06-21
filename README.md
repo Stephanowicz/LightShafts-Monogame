@@ -13,3 +13,4 @@ I also added a control-form for testing the lightshaft parameters.
 
 The folder [1 Basic LightShafts] contains the cleared up project with only the necessary functions to get the lightshaft effect running.
 
+The folder [1 Basic LightShafts v2] is an extended version of [1 Basic LightShafts] with some fancy stuff like drawing to desktop background (might not work on Win7). Also added the option to control the sample size of the lightshaft texture.

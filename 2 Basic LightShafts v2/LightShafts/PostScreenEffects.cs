@@ -65,8 +65,7 @@ namespace PostscreenEffects
             float Density,
             float Decay,
             float Weight,
-            float Exposure,
-            int sampleSize)
+            float Exposure)
         {
             _Device.SetRenderTarget( Destination );
             _Device.Clear( ClearOptions.Target, Vector4.Zero, 1, 0 );

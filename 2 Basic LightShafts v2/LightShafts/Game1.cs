@@ -532,8 +532,7 @@ namespace LightShafts
                 _RenderTargetLinearFilter,
                 texSampleSize);
 
-            // perform the light shafts on the masked background
-            // on lower resolution (defined by texSampleSize)
+            // perform the lightshafts effect on the masked background with the flare
             _PostScreenFilters.LightShafts(
                 _RenderTargetLinearFilter,
                 _RenderTargetShaftsSample,
@@ -541,12 +540,11 @@ namespace LightShafts
                 LightShaftDensity,
                 LightShaftDecay,
                 LightShaftWeight,
-                LightShaftExposure, 
-                texSampleSize);
+                LightShaftExposure);
 
             // _saveRTasPNG(_RenderTargetShaftsSample, "RenderTargetShaftsSample.png");
 
-            // up-scale the effect
+            // up-scale the result
             _PostScreenFilters._ToFullscreen(
                  _RenderTargetShaftsSample,
                  _RenderTargetShaftsFull);
@@ -554,7 +552,7 @@ namespace LightShafts
             // _saveRTasPNG(_RenderTargetShaftsFull, "RenderTargetShaftsFull.png");
 
 
-            // combine all the targets
+            // combine the targets
             GraphicsDevice.SetRenderTarget( _RenderTargetFinal);
             GraphicsDevice.Clear(ClearOptions.Target, Vector4.Zero, 1, 0);
             spriteBatch.Begin(
